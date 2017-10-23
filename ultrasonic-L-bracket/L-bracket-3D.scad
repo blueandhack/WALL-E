@@ -1,5 +1,5 @@
 standWidth = 15;
-standHeight = 4;
+standHeight = 8;
 standLength = 50;
 
 ultrasonicWidth = 3;
@@ -25,11 +25,18 @@ difference(){
 
 difference(){
     cube([standWidth, standLength, standHeight]);
-    translate([4, 13.5, 0]){
-        difference(){
-            cube([7, 23, 2]);
-        }
+//    translate([4, 13.5, 0]){
+//        difference(){
+//            cube([7, 23, 2]);
+//        }
+//    }
+    translate([0, 4, 0]){
+        cube([standWidth, standLength - 8, 2]);
     }
+    translate([0, 2, 2]){
+        cube([standWidth, standLength - 4, 2]);
+    }
+    
 }
 
 
@@ -52,3 +59,5 @@ difference(){
         }
     }
 }
+
+
