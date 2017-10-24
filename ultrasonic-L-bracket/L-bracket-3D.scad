@@ -3,7 +3,7 @@ standHeight = 7;
 standLength = 50;
 
 ultrasonicWidth = 3;
-ultrasonicHeight = 22;
+ultrasonicHeight = 24;
 ultrasonicLength = 50;
 totalUltrasonicHeight = ultrasonicHeight + standHeight;
 
@@ -16,21 +16,19 @@ difference(){
         rotate ([90,0,90]) cylinder(ultrasonicWidth,8,8);
     }
     translate([0, 4, 19.5+standHeight]){
-        rotate ([90,0,90]) cylinder(ultrasonicWidth,1.5,1.5);
+        rotate ([90,0,90]) cylinder(ultrasonicWidth,2,2);
     }
     translate([0, 45.5, 2.5+standHeight]){
-        rotate ([90,0,90]) cylinder(ultrasonicWidth,1.5,1.5);
+        rotate ([90,0,90]) cylinder(ultrasonicWidth,2,2);
+    }
+    translate([0, 18.5, standHeight]){
+        cube([ultrasonicWidth, 13, 5]);
     }
 }
 
 difference(){
     cube([standWidth, standLength, standHeight]);
-//    translate([4, 13.5, 0]){
-//        difference(){
-//            cube([7, 23, 2]);
-//        }
-//    }
-    translate([0, 4, 0]){
+    translate([6, 4, 0]){
         cube([standWidth, standLength - 8, 2]);
     }
     translate([0, 2, 2]){
