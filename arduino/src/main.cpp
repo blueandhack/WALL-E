@@ -20,7 +20,7 @@
 Servo myservo; // create servo object to control a servo
 int pos = 0;   // variable to store the servo position
 int delta = 3; // Angle to move at each iteration
-int flag = 10;
+int flag = 5;
 
 // Pins
 const int TRIG_PIN = 7;
@@ -74,8 +74,8 @@ float measureDistanceCM() {
   // ISTA 303 TODO: Include appropraite values for calculating the distance
   // here, found in the datasheet.
 
-  cm = pulse_width / 1;
-  inches = pulse_width / 1;
+  cm = pulse_width / 58;
+  inches = pulse_width / 148;
 
   // Wait at least 60ms before next measurement
   delay(60);
@@ -117,16 +117,6 @@ void loop() {
   myservo.write(pos); // tell servo to go to position in variable 'pos'
   delay(15);
 
-  // for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
-  //   // in steps of 1 degree
-  //   myservo.write(pos); // tell servo to go to position in variable 'pos'
-  //   delay(15);          // waits 15ms for the servo to reach the position
-  // }
-  // for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
-  //   myservo.write(pos); // tell servo to go to position in variable 'pos'
-  //   delay(15);          // waits 15ms for the servo to reach the position
-  // }
-
   // Step 1A: Brief delay to allow servo to move to position and settle
   delay(250);
 
@@ -136,17 +126,20 @@ void loop() {
     range = measureDistanceCM();
   }
 
-  Serial.println(range);
-
   // Step 3: Output angle and range to serial port
+  Serial.print(pos);
+  Serial.print(",");
+  Serial.println(range);
 
   // Step 4: Calculate new angle to move to
   pos = pos + flag;
 
   if (pos > 180) {
-    flag = -10;
+    pos = 180;
+    flag = -5;
   }
   if (pos < 0) {
-    flag = 10;
+    pos = 0;
+    flag = 5;
   }
 }

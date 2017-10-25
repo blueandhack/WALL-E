@@ -17,15 +17,46 @@
 # except sr.RequestError as e:
 #     print("Could not request results from Google Speech Recognition service; {0}".format(e))
 
-import matplotlib.pyplot as plt
-fig,ax=plt.subplots()
-y1=[]
-for i in range(50):
-    y1.append(i)
-    ax.cla()
-    ax.bar(y1,label='test',height=y1,width=0.3)
-    ax.legend()
-    plt.pause(0.3)
-    print("try")
+# import matplotlib.pyplot as plt
+# fig,ax=plt.subplots()
+# y1=[]
+# for i in range(50):
+#     y1.append(i)
+#     ax.cla()
+#     ax.bar(y1,label='test',height=y1,width=0.3)
+#     ax.legend()
+#     plt.pause(0.3)
+#     print("try")
+#
+# print("Hello")
 
-print("Hello")
+import serial
+import threading
+from time import sleep
+
+usbport = '/dev/cu.usbmodem1431' # change the usb port
+ser = serial.Serial(usbport, 9600)
+flag = 0
+
+def printData():
+    while True:
+        print(flag)
+        while flag == 1:
+            pass
+        data = ser.readline()
+        data = data.decode("utf-8")
+        print(data)
+
+def main():
+    threadA = threading.Thread(target=printData).start()
+    while True:
+        command = input("<<")
+        flag = 1
+        sleep(0.5)
+        data = ser.readline()
+        data = data.decode("utf-8")
+        print(data)
+        flag = 0
+
+if __name__ == '__main__':
+    main()
