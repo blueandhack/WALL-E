@@ -34,29 +34,63 @@ import serial
 import threading
 from time import sleep
 
-usbport = '/dev/cu.usbmodem1431' # change the usb port
+usbport = '/dev/cu.usbmodem1411' # change the usb port
 ser = serial.Serial(usbport, 9600)
 flag = 0
+sem = threading.Semaphore(1)
+value_begin = b'b'
+value_stop = b'.'
+value_right = b'r'
+value_left = b'l'
 
 def printData():
+    sleep(5)
     while True:
-        print(flag)
-        while flag == 1:
-            pass
+        sem.acquire()
         data = ser.readline()
         data = data.decode("utf-8")
         print(data)
+        sem.release()
+        sleep(0.5)
 
-def main():
-    threadA = threading.Thread(target=printData).start()
+def readInput():
+    # sem.acquire()
+    # command = input("<<")
+    # command = command.encode("utf-8")
+    # print(command)
+    # if(command == 'begin'):
+    #     command = value_begin
+    # if ser.writable():
+    #     ser.write(command)
+    # sem.release()
+    # sleep(0.5)
+
     while True:
         command = input("<<")
-        flag = 1
-        sleep(0.5)
+        sem.acquire()
+        command = command.encode("utf-8")
+        print(command)
+        if(command == b'begin'):
+            command = value_begin
+        if(command == b'stop'):
+            command = value_stop
+        if(command == b'left'):
+            command = value_left
+        if(command == b'right'):
+            command = value_right
+        print(command)
+        if ser.writable():
+            print("can write")
+            ser.write(command)
+        print(command)
         data = ser.readline()
         data = data.decode("utf-8")
         print(data)
-        flag = 0
+        sem.release()
+
+def main():
+    threading.Thread(target=printData).start()
+    threading.Thread(target=readInput).start()
 
 if __name__ == '__main__':
     main()
