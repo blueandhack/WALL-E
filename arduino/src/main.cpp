@@ -1,5 +1,4 @@
 #include <Arduino.h>
-
 /* Adapted from open source HC-SR04 Arduino driver.
  *
  * Hardware Connections:
@@ -20,7 +19,6 @@
 Servo myservo; // create servo object to control a servo
 int pos = 0;   // variable to store the servo position
 int delta = 3; // Angle to move at each iteration
-int flag = 5;
 
 // Pins
 const int TRIG_PIN = 7;
@@ -82,7 +80,7 @@ float measureDistanceCM() {
 
   // Print out results
   if (pulse_width > MAX_DIST) {
-    Serial.println("Out of range");
+    // Serial.println("Out of range");
     return 400.0;
   } else {
     // Serial.print(cm);
@@ -115,7 +113,6 @@ void loop() {
   // Step 1: Move to specific angle
 
   myservo.write(pos); // tell servo to go to position in variable 'pos'
-  delay(15);
 
   // Step 1A: Brief delay to allow servo to move to position and settle
   delay(250);
@@ -132,14 +129,14 @@ void loop() {
   Serial.println(range);
 
   // Step 4: Calculate new angle to move to
-  pos = pos + flag;
+  pos = pos + delta;
 
   if (pos > 180) {
     pos = 180;
-    flag = -5;
+    delta = -3;
   }
   if (pos < 0) {
     pos = 0;
-    flag = 5;
+    delta = 3;
   }
 }
