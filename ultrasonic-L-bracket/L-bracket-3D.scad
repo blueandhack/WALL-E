@@ -1,3 +1,5 @@
+$fn=60;
+
 standWidth = 15;
 standHeight = 7;
 standLength = 50;
