@@ -14,7 +14,7 @@ Serial myPort;  // Create object from Serial class
 int val;        // Temporary variable storing data received from the serial port
 
 // Array of x/y coordinates recieved over serial port.  Maximum number of recordings to store is MAX_RECORDINGS. 
-int MAX_RECORDINGS = 36;
+int MAX_RECORDINGS = 20;
 int[][] data = new int[MAX_RECORDINGS][2];
 int curDataIdx = 0;      // Index of array element that has highest populated value (-1)
 
@@ -58,22 +58,36 @@ void serialEvent(Serial port) {
   
 }
 
-void lineAngle(int x, int y, float angle, float length)
-{
-  line(x, y, x+cos(angle)*length, y-sin(angle)*length);
-}
-
 
 // Draws a shape at each x/y location sent over the serial port. 
 // Only draws the last N locations, where N is equal to MAX_RECORDINGS (i.e. the size of the data array). 
 void draw_stored_data() {
+    int size = 20;                // Size of shape to draw
         
     for (int i=0; i<MAX_RECORDINGS; i++) {        
       int x = data[i][0];            // Grab x/y values from stored data
       int y = data[i][1];
 
-      stroke(#000055);
-      lineAngle(400,400, x, y);
+      stroke(128, 128, 128);
+      
+      float angle;
+      
+      if(x>90){
+        angle = ((x-90)*3.14)/180; 
+      }else{
+        angle = (x*3.14)/180;
+      }
+      
+      float a = sin(angle)*y*5;
+      float b = cos(angle)*y*5;
+
+      if(x > 90){
+        line(400,400,400+a,400+b);
+      }else if(x < 90){
+        line(400,400,400-b,400+a);
+      }else{
+        line(400,400,400,400+y);
+      }
 
       //if ((x > 0) && (y > 0)) {          // Ensure that data is valid (greater than zero).
       //  int fillCol = floor(((float)i / (float)MAX_RECORDINGS) * 255); 
@@ -94,7 +108,7 @@ void draw_stored_data() {
 
 // This function runs a single time after the program beings. 
 void setup() {
-  size(800, 600);                    // Window size
+  size(800, 800);                    // Window size
   //colorMode(HSB, 255, 255, 255);     // Colour space
       
   // Initialize Serial Port
@@ -124,7 +138,7 @@ void setup() {
 // This function runs repeatedly, like the loop() function in the Arduino language. 
 void draw() {
   
-  background(51);             // Set background to white
+  background(255, 255, 255);             // Set background to white
 
   // At each iteration, draw the data currently specified in the 'data' array to the screen.    
   draw_stored_data();
