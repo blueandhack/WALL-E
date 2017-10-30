@@ -78,8 +78,8 @@ void draw_stored_data() {
         angle = (x*3.14)/180;
       }
       
-      float a = sin(angle)*y*5;
-      float b = cos(angle)*y*5;
+      float a = sin(angle)*y*2;
+      float b = cos(angle)*y*2;
 
       if(x > 90){
         line(400,400,400+a,400+b);
@@ -88,19 +88,6 @@ void draw_stored_data() {
       }else{
         line(400,400,400,400+y);
       }
-
-      //if ((x > 0) && (y > 0)) {          // Ensure that data is valid (greater than zero).
-      //  int fillCol = floor(((float)i / (float)MAX_RECORDINGS) * 255); 
-      //  fill(fillCol, fillCol, fillCol);  // Set fill colour dynamically
-      //  stroke(128, 128, 128);            // Set stroke to middle grey
-      
-      //  //rect(x, y, size, size);      // Draw rectangle at those x/y coordinates.
-      //  ellipse(x, y, size, size);     // Draw circle at those x/y coordinates.
-    
-      //  // Example of drawing text      
-      //  fill(0, 0, 255);                   // Set fill to blue (RGB = 0, 0, 255)
-      //  text(i, x - 5, y + 5); 
-      //} 
     } 
 
 }

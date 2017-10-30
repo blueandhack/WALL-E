@@ -4,7 +4,7 @@ import threading
 import csv
 from time import sleep
 
-usbport = '/dev/cu.usbmodem1441' # change the usb port
+usbport = '/dev/cu.usbmodem1411' # change the usb port
 ser = serial.Serial(usbport, 9600)
 flag = 0
 sem = threading.Semaphore(1)
