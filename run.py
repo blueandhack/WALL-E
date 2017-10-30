@@ -1,12 +1,10 @@
 import speech_recognition as sr
-
-
 import serial
 import threading
 import csv
 from time import sleep
 
-usbport = '/dev/cu.usbmodem1431' # change the usb port
+usbport = '/dev/cu.usbmodem1441' # change the usb port
 ser = serial.Serial(usbport, 9600)
 flag = 0
 sem = threading.Semaphore(1)
@@ -29,25 +27,15 @@ def printData():
                 result = data.split(',')
                 # print(result)
                 writer.writerow(result)
-
         sem.release()
         sleep(0.5)
 
 def readInput():
-    # sem.acquire()
-    # command = input("<<")
-    # command = command.encode("utf-8")
-    # print(command)
-    # if(command == 'begin'):
-    #     command = value_begin
-    # if ser.writable():
-    #     ser.write(command)
-    # sem.release()
-    # sleep(0.5)
-
     while True:
-        # command = b'.'
-        # input("<< ")
+        command = b'.'
+
+        ###############################################
+        # input("<< Press Enter to Say Something")
         # #
         # # Record Audio
         # r = sr.Recognizer()
@@ -59,13 +47,27 @@ def readInput():
         #     # for testing purposes, we're just using the default API key
         #     # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
         #     # instead of `r.recognize_google(audio)`
-        #     command = r.recognize_google(audio)
-        #     print("You said: " + command)
+        #
+        #     say = r.recognize_google(audio)
+        #     say = say.lower()
+        #
+        #     if(say.find('begin')!=-1):
+        #         command = value_begin
+        #     elif(say.find('right')!=-1):
+        #         command = value_right
+        #     elif(say.find('left')!=-1):
+        #         command = value_left
+        #     else:
+        #         command = value_stop
+        #     print("You said: " + say)
         # except sr.UnknownValueError:
         #     print("Google Speech Recognition could not understand audio")
         # except sr.RequestError as e:
         #     print("Could not request results from Google Speech Recognition service; {0}".format(e))
+        ###############################################
 
+        # input command
+        ##############################################
         command = input("<< ")
 
         sem.acquire()
@@ -81,14 +83,10 @@ def readInput():
             command = value_right
         else:
             command = value_stop
-        # print(command)
+        ###############################################
+
         if ser.writable():
-            # print("can write")
             ser.write(command)
-        # print(command)
-        # data = ser.readline()
-        # data = data.decode("utf-8")
-        # print(data)
         sem.release()
 
 def test():

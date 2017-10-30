@@ -129,10 +129,9 @@ void loop() {
         Serial.print(",");
         Serial.println(records[i][1]);
       }
-      recordsIndex = 0;
-      turn = '.';
-      count = 0;
     }
+    recordsIndex = 0;
+    count = 0;
   } else if (turn == 'r') {
     pos = 180;
     delta = -3;

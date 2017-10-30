@@ -15,13 +15,47 @@ The project has two parts:
 
 ## Code
 
+I wrote two parts of similar code.
+
+The first part is requirements.
+
+And the second part is like the first part, but I add input  and speech recognition by python that means user can control it by using input or speaking.
+
+There are three python files:
+
+- run.py
+- draw.py
+- findMic.py
+
+### How to run?
+
+First, install python dependencies
+
+```
+python3 -m pip install pyserial
+python3 -m pip install SpeechRecognition
+python3 -m pip install -U matplotlib
+```
+
+Then, run `findMic.py` to find microphone index in `run.py` line 42. Also, you should change line 7 in `run.py`. After, you can decide which input, such as, if you want to use typing, you should uncomment line 71 to 85 and comment line 38 to 66, otherwise, if you want to speaking, you should uncomment line 38 to 66 and comment line 71 to 85.
+
+Then, input `python3 run.py` in your terminal, you can input some commands:
+
+- begin
+- stop
+- right
+- left
+
+When you input begin, and wait it turn around. You can see `result.csv` file. Then, input `python3 draw.py` to generate a plot by the csv file.
+
+![](https://i.imgur.com/L4EjPBr.png)
 
 
 ## 2.5D / 3D Bracket
 
 ### 2.5D Bracket
 
-It has a stand to hold Arduino board. Actually, there has three board can fix the Arduino board and there are a little bar can make it .
+It has a stand can hold Arduino board. There has three board can fix the Arduino board and the three boards making the structure firm. Also, it has a little bar can make it stay there.
 
 ![Bar](https://i.imgur.com/wWh0VJJ.jpg)
 A Little Bar
