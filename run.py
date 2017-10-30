@@ -1,20 +1,5 @@
-# import speech_recognition as sr
-#
-# # Record Audio
-# r = sr.Recognizer()
-# with sr.Microphone() as source:
-#     print("Say something!")
-#     audio = r.listen(source)
-# # Speech recognition using Google Speech Recognition
-# try:
-#     # for testing purposes, we're just using the default API key
-#     # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
-#     # instead of `r.recognize_google(audio)`
-#     print("You said: " + r.recognize_google(audio))
-# except sr.UnknownValueError:
-#     print("Google Speech Recognition could not understand audio")
-# except sr.RequestError as e:
-#     print("Could not request results from Google Speech Recognition service; {0}".format(e))
+import speech_recognition as sr
+
 
 import serial
 import threading
@@ -61,18 +46,41 @@ def readInput():
     # sleep(0.5)
 
     while True:
+        # command = b'.'
+        # input("<< ")
+        # #
+        # # Record Audio
+        # r = sr.Recognizer()
+        # with sr.Microphone(device_index=8) as source:
+        #     print("Say something!")
+        #     audio = r.listen(source)
+        # # Speech recognition using Google Speech Recognition
+        # try:
+        #     # for testing purposes, we're just using the default API key
+        #     # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
+        #     # instead of `r.recognize_google(audio)`
+        #     command = r.recognize_google(audio)
+        #     print("You said: " + command)
+        # except sr.UnknownValueError:
+        #     print("Google Speech Recognition could not understand audio")
+        # except sr.RequestError as e:
+        #     print("Could not request results from Google Speech Recognition service; {0}".format(e))
+
         command = input("<< ")
+
         sem.acquire()
         command = command.encode("utf-8")
         # print(command)
         if(command == b'begin'):
             command = value_begin
-        if(command == b'stop'):
+        elif(command == b'stop'):
             command = value_stop
-        if(command == b'left'):
+        elif(command == b'left'):
             command = value_left
-        if(command == b'right'):
+        elif(command == b'right'):
             command = value_right
+        else:
+            command = value_stop
         # print(command)
         if ser.writable():
             # print("can write")
