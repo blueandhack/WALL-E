@@ -46,7 +46,7 @@ Then, input `python3 run.py` in your terminal, you can input some commands:
 - right
 - left
 
-When you input begin, and wait it turn around. You can see `result.csv` file. Then, input `python3 draw.py` to generate a plot by the csv file.
+When you input `begin`, we should wait it scan around. Then, you can see `result.csv` file in the same directory. Last, input `python3 draw.py` to generate a plot by the csv file.
 
 ![](https://i.imgur.com/L4EjPBr.png)
 
@@ -67,4 +67,34 @@ Back Side
 Right Side
 
 ### 3D Bracket
+
+The 3D Bracket, it has two parts, one is ultrasonic sensor holder, and other one is stand.
+
+![](https://i.imgur.com/LvWvD2j.jpg)
+Stand and Holder
+
+![](https://i.imgur.com/GPN6Lue.jpg)
+Front Side
+
+![](https://i.imgur.com/d2L7W3f.jpg)
+Bottom Side
+
+![](https://i.imgur.com/s5f5YxP.jpg)
+Back Side
+
+![](https://i.imgur.com/RU1bFiS.jpg)
+Right Side
+
+## Extensions:
+
+1. Using command control ultrasonic sonar.
+2. Different visualization by using matplotlib
+3. Stronger 2.5D Bracket, it has Arduino board stand.
+
+## References
+
+ISTA 303: Assignment 2, Ultrasonic Sonar with Visualization
+[Speech Recognition using Google Speech API](https://pythonspot.com/en/speech-recognition-using-google-speech-api/)
+[WALL-E Poster](https://en.wikipedia.org/wiki/WALL-E)
+
 
